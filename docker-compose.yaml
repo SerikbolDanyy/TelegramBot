@@ -1,1 +1,21 @@
 services:
+  mysql:
+    image: mysql:9.4.0
+    restart: "no"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlPass
+      MYSQL_USER: mysqlUser
+      MYSQL_PASSWORD: mysqlPass
+      MYSQL_DATABASE: mydb
+    healthcheck:
+      test: mysqladmin ping -u root -p $$MYSQL_ROOT_PASSWORD
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
+volumes:
+  mysql_data:

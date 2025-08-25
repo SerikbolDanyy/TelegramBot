@@ -1,4 +1,10 @@
 package org.vandsoft.telegrambot.repository;
 
-public interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<org.vandsoft.telegrambot.model.User, java.lang.Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.vandsoft.telegrambot.model.User;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByTelegramId(Long telegramId);
 }
